@@ -22,6 +22,10 @@ gameState = np.zeros((nxC, nyC))
 # Bucle de ejecución
 while True:
 
+    # Copia del estado que recibe la iteración.
+    newState = np.copy(gameState)
+    # Esta matriz recibirá los cambios que se realicen en cada ciclo.
+
     # Ciclo para recorrer las celdas generadas
     for x in range(nxC):
         for y in range(nyC):
@@ -41,10 +45,22 @@ while True:
                     gameState[(x-1) % nxC, (y+1) % nyC] + \
                     gameState[(x)   % nxC, (y+1) % nyC] + \
                     gameState[(x+1) % nxC, (y+1) % nyC]
+            
+            # REGLA 1: Si muerta y 3 vecinas vivas, entonces revive.
+            if gameState[x, y] == 0 and n_vec == 3:
+                newState[x, y] = 1
+            # REGLA 2: Si viva y, menos de 2 o más de 3 vivas, entonces muere.
+            elif gameState[x, y] == 1 and (n_vec < 2 or n_vec > 3):
+                newState[x, y] = 0
 
 
             # Dibuja los rectángulos. Recibe: pantalla, color, límites de polígonos, grosor
-            pygame.draw.polygon(screen, (128,128,128), poly, 1) # 1 pixel (cuadrícula)
-    
+            if gameState[x, y] == 0:
+                pygame.draw.polygon(screen, (128,128,128), poly, 1) # 1 pixel (cuadrícula)
+            else:
+                pygame.draw.polygon(screen, (255, 255, 255), poly, 0) # 0 para rellenar completo
+
+    # Actualizar el estado que inicia la siguiente iteración
+    gameState = np.copy(newState)
     # Mostrar los resultados de cuadrícula para cada iteración
     pygame.display.flip()
