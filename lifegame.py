@@ -1,5 +1,6 @@
 import pygame
 import numpy as np
+import time
 
 pygame.init()
 
@@ -19,12 +20,31 @@ dimCH = hight // nyC # alto de cada celda
 # Estructura de datos para el estado de cada celda
 gameState = np.zeros((nxC, nyC))
 
+# Posibles inicializaciones
+# # Automata palo.
+#gameState[13,13] = 1
+#gameState[13,14] = 1
+#gameState[13,12] = 1
+
+# # Móvil
+gameState[13,13] = 1
+gameState[14,14] = 1
+gameState[14,15] = 1
+gameState[13,15] = 1
+gameState[12,15] = 1
+
 # Bucle de ejecución
 while True:
 
     # Copia del estado que recibe la iteración.
     newState = np.copy(gameState)
     # Esta matriz recibirá los cambios que se realicen en cada ciclo.
+
+    # Reiniciar la pantalla.
+    screen.fill(bg)
+
+    # Delay para mejor visualización
+    time.sleep(0.1)
 
     # Ciclo para recorrer las celdas generadas
     for x in range(nxC):
@@ -62,5 +82,6 @@ while True:
 
     # Actualizar el estado que inicia la siguiente iteración
     gameState = np.copy(newState)
+
     # Mostrar los resultados de cuadrícula para cada iteración
     pygame.display.flip()
