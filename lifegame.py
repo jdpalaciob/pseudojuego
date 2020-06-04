@@ -49,11 +49,17 @@ while True:
     # Delay para mejor visualización
     time.sleep(0.1)
 
-    # Eventos de teclado
+    # Eventos de teclado y mouse
     ev = pygame.event.get()
     for event in ev:
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN:    # Evento del teclado (presionar tecla)
             pause = not pause
+        
+        click = pygame.mouse.get_pressed()  # Evento del mouse. Un tuple de 3, con 1 en la tecla oprimida
+        if sum(click) > 0:
+            posX, posY = pygame.mouse.get_pos() # Posición del click dentro de la pantalla, en pixels
+            celX, celY = int(np.floor(posX / dimCW)), int(np.floor(posY / dimCH))
+            newState[celX, celY] = not click[2] # Permite dar o quitar
 
     # Ciclo para recorrer las celdas generadas
     for x in range(nxC):
