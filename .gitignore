@@ -218,3 +218,10 @@ dmypy.json
 .history
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode
+.idea/vcs.xml
+.idea/pseudojuego.iml
+.idea/modules.xml
+.idea/misc.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/.gitignore
