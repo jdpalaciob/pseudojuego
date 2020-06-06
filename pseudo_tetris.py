@@ -17,6 +17,10 @@ screen.fill((25, 25, 25))
 fondo = pygame.image.load('fondo.jpg').convert()
 
 ### EXECUTION LOOP ####
-while True:
+RUN = True
+while RUN:
     screen.blit(fondo, (58, 0))
     pygame.display.flip()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            RUN = False
