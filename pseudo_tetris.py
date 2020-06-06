@@ -16,13 +16,33 @@ pygame.display.set_caption('PseudoTetris')
 screen.fill((25, 25, 25))
 fondo = pygame.image.load('fondo.jpg').convert()
 
+#### GRID ####
+# Cells #
+cX, cY = 20, 20
+WC = width // cY
+HC = height // cY
+
 ### EXECUTION LOOP ####
 RUN = True
 while RUN:
 
+    # Colisng window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             RUN = False
 
+    for x in range(cX):
+        for y in range(cY):
+
+            # Generating grid
+            grid = [
+                ((x)   * WC, (y)   * HC),
+                ((x+1) * WC, (y)   * HC),
+                ((x+1) * WC, (y+1) * HC),
+                ((x)   * WC, (y+1) * HC)
+            ]
+            pygame.draw.polygon(screen, (25, 25, 25), grid, 1)
+
+    # Showing screen
     screen.blit(fondo, (58, 0))
     pygame.display.flip()
