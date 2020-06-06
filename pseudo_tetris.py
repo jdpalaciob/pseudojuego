@@ -2,6 +2,7 @@
 
 import numpy as np
 import pygame
+from random import choice
 
 pygame.init()
 
@@ -18,26 +19,42 @@ screen.fill((25, 25, 25))
 fondo = pygame.image.load('fondo.jpg').convert()
 
 #### TETRIMINOS ####
-O_tet = np.array(
-    [1, 1],
-    [1, 1])
-J_tet = np.array(
-    [0, 0, 1],
-    [1, 1, 1])
-L_tet = np.array(
-    [1, 0, 0],
-    [1, 1, 1])
-I_tet = np.array(
-    [1, 1, 1, 1])
-S_tet = np.array(
-    [0, 1, 1],
-    [1, 1, 0])
-Z_tet = np.array(
-    [1, 1, 0],
-    [0, 1, 1])
-T_tet = np.array(
-    [0, 1, 0],
-    [1, 1, 1])
+def tetrimino():
+    tet = choice(('O', 'J', 'L', 'I', 'S', 'Z', 'T'))
+    if tet == 'O':
+        O_tet = np.array(
+            [1, 1],
+            [1, 1])
+        return O_tet
+    elif tet == 'J':
+        J_tet = np.array(
+            [0, 0, 1],
+            [1, 1, 1])
+        return J_tet
+    elif tet == 'L':
+        L_tet = np.array(
+            [1, 0, 0],
+            [1, 1, 1])
+        return L_tet
+    elif tet == 'I':
+        I_tet = np.array(
+            [1, 1, 1, 1])
+        return I_tet
+    elif tet == 'S':
+        S_tet = np.array(
+            [0, 1, 1],
+            [1, 1, 0])
+        return S_tet
+    elif tet == 'Z':
+        Z_tet = np.array(
+            [1, 1, 0],
+            [0, 1, 1])
+        return Z_tet
+    elif tet == 'T':
+        T_tet = np.array(
+            [0, 1, 0],
+            [1, 1, 1])
+        return Z_tet
 
 ### EXECUTION LOOP ####
 RUN = True
