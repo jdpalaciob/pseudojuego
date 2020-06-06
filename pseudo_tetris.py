@@ -42,7 +42,7 @@ while RUN:
                 ((x+1) * WC, (y+1) * HC),
                 ((x)   * WC, (y+1) * HC)
             ]
-            pygame.draw.polygon(screen, (25, 25, 25), grid, 1)
+            pygame.draw.polygon(screen, (25, 170, 190), grid, 1)
 
     # Showing screen
     pygame.display.flip()
