@@ -1,8 +1,7 @@
 """ JUEGO TRIBUTO A TETRIS """
-
+from random import choice
 import numpy as np
 import pygame
-from random import choice
 
 pygame.init()
 
@@ -22,39 +21,33 @@ fondo = pygame.image.load('fondo.jpg').convert()
 def tetrimino():
     tet = choice(('O', 'J', 'L', 'I', 'S', 'Z', 'T'))
     if tet == 'O':
-        O_tet = np.array(
+        tet = np.array([
             [1, 1],
-            [1, 1])
-        return O_tet
+            [1, 1]])
     elif tet == 'J':
-        J_tet = np.array(
+        tet = np.array([
             [0, 0, 1],
-            [1, 1, 1])
-        return J_tet
+            [1, 1, 1]])
     elif tet == 'L':
-        L_tet = np.array(
+        tet = np.array([
             [1, 0, 0],
-            [1, 1, 1])
-        return L_tet
+            [1, 1, 1]])
     elif tet == 'I':
-        I_tet = np.array(
-            [1, 1, 1, 1])
-        return I_tet
+        tet = np.array([
+            [1, 1, 1, 1]])
     elif tet == 'S':
-        S_tet = np.array(
+        tet = np.array([
             [0, 1, 1],
-            [1, 1, 0])
-        return S_tet
+            [1, 1, 0]])
     elif tet == 'Z':
-        Z_tet = np.array(
+        tet = np.array([
             [1, 1, 0],
-            [0, 1, 1])
-        return Z_tet
+            [0, 1, 1]])
     elif tet == 'T':
-        T_tet = np.array(
+        tet = np.array([
             [0, 1, 0],
-            [1, 1, 1])
-        return Z_tet
+            [1, 1, 1]])
+    return tet
 
 ### EXECUTION LOOP ####
 RUN = True
