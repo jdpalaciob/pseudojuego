@@ -16,6 +16,13 @@ pygame.display.set_caption('PseudoTetris')
 # Background #
 screen.fill((25, 25, 25))
 fondo = pygame.image.load('fondo.jpg').convert()
+screen.blit(fondo, (58, 0))
+
+#### GRID ####
+# Cells #
+cX, cY = 20, 20
+WC = width // cY
+HC = height // cY
 
 #### TETRIMINOS ####
 def tetrimino():
@@ -52,8 +59,25 @@ def tetrimino():
 ### EXECUTION LOOP ####
 RUN = True
 while RUN:
-    screen.blit(fondo, (58, 0))
-    pygame.display.flip()
+
+    # Colisng window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             RUN = False
+
+    for x in range(cX):
+        for y in range(cY):
+
+            # Grid just in background image
+            if 60 <= (x * WC) < 630:
+                # Generating grid
+                grid = [
+                    ((x)   * WC, (y)   * HC),
+                    ((x+1) * WC, (y)   * HC),
+                    ((x+1) * WC, (y+1) * HC),
+                    ((x)   * WC, (y+1) * HC)
+                ]
+                pygame.draw.polygon(screen, (25, 170, 190), grid, 1)
+
+    # Showing screen
+    pygame.display.flip()
