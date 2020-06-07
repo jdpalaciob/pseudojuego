@@ -1,5 +1,6 @@
 """ JUEGO TRIBUTO A TETRIS """
 from random import choice
+import time
 import numpy as np
 import pygame
 
@@ -64,20 +65,31 @@ while RUN:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             RUN = False
+    
+    # Generating Tetrimino
+    fig = tetrimino()
+    print(fig)
 
     for x in range(cX):
         for y in range(cY):
 
-            # Grid just in background image
+            # Generating grid
+            grid = [
+                ((x)   * WC, (y)   * HC),
+                ((x+1) * WC, (y)   * HC),
+                ((x+1) * WC, (y+1) * HC),
+                ((x)   * WC, (y+1) * HC)
+            ]
+            # Grid just visible in background image
             if 60 <= (x * WC) < 630:
-                # Generating grid
-                grid = [
-                    ((x)   * WC, (y)   * HC),
-                    ((x+1) * WC, (y)   * HC),
-                    ((x+1) * WC, (y+1) * HC),
-                    ((x)   * WC, (y+1) * HC)
-                ]
                 pygame.draw.polygon(screen, (25, 170, 190), grid, 1)
+            
+            # Tetrimino impression
+            if x < fig.shape[1] and y < fig.shape[0]:
+                if fig[y, x] == 1:
+                    pygame.draw.polygon(screen, (250, 0, 0), grid, 0)
+
 
     # Showing screen
     pygame.display.flip()
+    time.sleep(10)
