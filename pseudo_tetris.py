@@ -61,35 +61,46 @@ def tetrimino():
 RUN = True
 while RUN:
 
-    # Colisng window
+    # CLEANING BACKGORUND
+    screen.fill((25, 25, 25))
+    screen.blit(fondo, (58, 0))
+
+    # CLOSING WINDOW
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             RUN = False
-    
-    # Generating Tetrimino
-    fig = tetrimino()
-    print(fig)
 
+    # GENERATING TETRIMINO
+    # Importing structure
+    fig = tetrimino()
+    # Surface to enclose tetrimino
+    s_fig = pygame.Surface((fig.shape[1]*WC, fig.shape[0]*HC))
+    s_fig.set_colorkey((0, 0, 0))    # Making invisible
+    # Generating rectangles
+    for i in range(fig.shape[1]):
+        for j in range(fig.shape[0]):
+            if fig[j, i] == 1:
+                r = pygame.Rect((i*WC, j*HC), (WC, HC))
+                pygame.draw.rect(s_fig, (250, 0, 0), r)
+    # Enclosing surface in a rectangle
+    fig_rect = s_fig.get_rect()
+    fig_rect.move_ip((8*WC, 0))    # Se mueve para que aparezca en la mitad
+    screen.blit(s_fig, fig_rect)    # Imprime la ruperficie s_fig, dodne esté fig_rect
+
+    # GENERATING GRID
     for x in range(cX):
         for y in range(cY):
 
-            # Generating grid
             grid = [
                 ((x)   * WC, (y)   * HC),
                 ((x+1) * WC, (y)   * HC),
                 ((x+1) * WC, (y+1) * HC),
                 ((x)   * WC, (y+1) * HC)
             ]
-            # Grid just visible in background image
-            if 60 <= (x * WC) < 630:
+            #Grid just visible in background image
+            if 60 // WC < (x) < 630 // WC:
                 pygame.draw.polygon(screen, (25, 170, 190), grid, 1)
-            
-            # Tetrimino impression
-            if x < fig.shape[1] and y < fig.shape[0]:
-                if fig[y, x] == 1:
-                    pygame.draw.polygon(screen, (250, 0, 0), grid, 0)
 
-
-    # Showing screen
+    # SHOWING SCREEN
     pygame.display.flip()
-    time.sleep(10)
+    time.sleep(1)
